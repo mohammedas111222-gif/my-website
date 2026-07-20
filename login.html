@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - نور</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff85c0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            animation: slideIn 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .form-group:focus-within {
+            transform: translateX(-3px);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .form-group:focus-within label {
+            color: #ff6b9d;
+            transform: scale(1.05);
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffe0ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: right;
+            background-color: #fff5fa;
+            letter-spacing: 0.5px;
+        }
+        
+        input:hover {
+            border-color: #ff85c0;
+            background-color: #fffbfe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.2);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        input::placeholder {
+            transition: color 0.3s;
+            color: #ddd;
+        }
+        
+        input[type="password"] {
+            font-size: 20px;
+            letter-spacing: 4px;
+        }
+        
+        input[type="password"]::placeholder {
+            font-size: 16px;
+            letter-spacing: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff85c0 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 15px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+            letter-spacing: 1.5px;
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+        }
+        
+        .error {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+            padding: 12px;
+            background-color: #fadbd8;
+            border-radius: 8px;
+            border-right: 4px solid #e74c3c;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .success {
+            color: #27ae60;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+            padding: 12px;
+            background-color: #d5f4e6;
+            border-radius: 8px;
+            border-right: 4px solid #27ae60;
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>💕نورعيوني💕</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">الاسم:</label>
+                <input type="text" id="username" name="username" placeholder="أدخل الاسم" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور (تاريخ الميلاد):</label>
+                <input type="text" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+            <button type="submit">تسجيل الدخول</button>
+            <div class="error" id="errorMsg">❌ بيانات غير صحيحة!</div>
+            <div class="success" id="successMsg">✅ مرحباً بك!</div>
+        </form>
+    </div>
+
+    <script>
+        // إضافة تأثيرات احترافية
+        const form = document.getElementById('loginForm');
+        const inputs = document.querySelectorAll('input');
+        const button = document.querySelector('button');
+        
+        inputs.forEach((input, index) => {
+            input.addEventListener('focus', function() {
+                this.style.backgroundColor = '#fffbfe';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.style.backgroundColor = '#fff5fa';
+                }
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    if (index === 0) {
+                        inputs[1].focus();
+                    } else {
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                    e.preventDefault();
+                }
+            });
+        });
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            const successMsg = document.getElementById('successMsg');
+            
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            
+            // التحقق من المدخلات
+            if (!username || !password) {
+                errorMsg.textContent = '❌ يرجى ملء جميع الحقول!';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // البيانات الصحيحة
+            const correctUsername = 'مرت ويتي';
+            const correctPassword = '2006.8.14';
+            
+            // إضافة loading effect
+            button.style.opacity = '0.8';
+            button.disabled = true;
+            button.textContent = '⏳ جارٍ التحقق...';
+            
+            setTimeout(() => {
+                const passwordValid = password === correctPassword;
+
+                if (username === correctUsername && passwordValid) {
+                    successMsg.style.display = 'block';
+                    button.textContent = '✅ تم!';
+                    setTimeout(() => {
+                        window.location.href = 'celebration.html';
+                    }, 1000);
+                } else {
+                    errorMsg.textContent = '❌ اسم أو كلمة مرور خاطئة!';
+                    errorMsg.style.display = 'block';
+                    button.style.opacity = '1';
+                    button.disabled = false;
+                    button.textContent = 'تسجيل الدخول';
+                }
+            }, 800);
+        });
+        
+        // تأثير الاهتزاز للرسائل الخاطئة
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
